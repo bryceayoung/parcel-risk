@@ -1,3 +1,3 @@
-# parcel-risk
-## find out where fires happen!
-A tool that asseses the risk of fire in Gunnison County
+# parcel-wildfire-WUI
+## Get detailed building and vegetation fuel attributes mapped in the wildland urban interface (WUI)
+A tool that builds fuel attribute maps per parcel at the county level
