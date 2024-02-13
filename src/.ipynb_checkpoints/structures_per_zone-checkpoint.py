@@ -24,14 +24,13 @@ def structures_per_zone(gdf, footprint_col, buffer_cols):
     for col in buffer_cols:
         counts_df[col] = 0  # Initialize counts to 0
 
-    # Iterate over each structure in the GeoDataFrame using itertuples()
-    for structure in gdf.itertuples():
+    # Iterate over each structure in the GeoDataFrame
+    for index, structure in gdf.iterrows():
         # Check intersections for each buffer zone
         for buffer_col in buffer_cols:
             # Exclude the current structure's footprint from the comparison
-            other_footprints = gdf.drop(structure.Index)[footprint_col]
+            other_footprints = gdf.drop(index)[footprint_col]
             # Count how many other footprints intersect with the current structure's buffer zone
-            # Note the change in how we access 'structure's buffer zone
-            counts_df.at[structure.Index, buffer_col] = other_footprints.intersects(getattr(structure, buffer_col)).sum()
+            counts_df.at[index, buffer_col] = other_footprints.intersects(structure[buffer_col]).sum()
 
     return counts_df
